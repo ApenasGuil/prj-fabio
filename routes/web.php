@@ -13,6 +13,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
+Route::group(['namespace' => 'App\Http\Controllers'], function () {
+    Route::resource('filmes', 'MovieController')->names('movie')->parameters(['filmes' => 'movie']);
 });
+
+Route::group(['namespace' => 'App\Http\Controllers'], function () {
+    Route::resource('atores', 'StarController')->names('star')->parameters(['atores' => 'star']);
+});
+
+// Route::group(['namespace' => 'App\Http\Controllers'], function () {
+//     Route::resource('diretores', 'DirectorsController')->names('director')->parameters(['diretores' => 'director']);
+// });
