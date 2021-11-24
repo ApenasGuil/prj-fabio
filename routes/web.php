@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\StarController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,6 +24,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
 
 Route::group(['namespace' => 'App\Http\Controllers'], function () {
     Route::resource('atores', 'StarController')->names('star')->parameters(['atores' => 'star']);
+    Route::get('/detach', [StarController::class, 'detach'])->name('star.detach');
 });
 
 // Route::group(['namespace' => 'App\Http\Controllers'], function () {

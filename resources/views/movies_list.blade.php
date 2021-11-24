@@ -27,8 +27,8 @@
                     <div class="btn-group" role="group" aria-label="Basic example">
                         <a href="{{ route('movie.show', ['movie' => $movie->id]) }}" type="button"
                             class="btn btn-secondary">Informações</a>
-                        <button href="{{ route('movie.edit', ['movie' => $movie->id]) }}" type="button"
-                            class="btn btn-secondary">Alterar</button>
+                        <a href="{{ route('movie.edit', ['movie' => $movie->id]) }}" type="button"
+                            class="btn btn-secondary">Alterar</a>
                         <form action="{{ route('movie.destroy', ['movie' => $movie->id]) }}" method="post">
                             @csrf
                             @method('delete')

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Star;
+use App\Models\Movie;
 use Illuminate\Http\Request;
 
 class StarController extends Controller
@@ -96,5 +97,14 @@ class StarController extends Controller
     {
         $star->delete();
         return redirect()->route('star.index');
+    }
+
+    public function detach(Request $request, Star $star)
+    {
+        // dd($request->all());
+        $movie = Movie::where('id', $request->movie)->first();
+        $movie->stars()->detach($request->star);
+        // $star->movies()->detach();
+        return redirect()->back();
     }
 }

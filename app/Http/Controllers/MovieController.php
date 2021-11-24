@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Movie;
+use App\Models\Star;
 use Illuminate\Http\Request;
 
 class MovieController extends Controller
@@ -67,8 +68,10 @@ class MovieController extends Controller
      */
     public function edit(Movie $movie)
     {
+        $stars = Star::all();
         return view('movie_update', [
-            'movie' => $movie
+            'movie' => $movie,
+            'stars' => $stars
         ]);
     }
 
@@ -81,6 +84,9 @@ class MovieController extends Controller
      */
     public function update(Request $request, Movie $movie)
     {
+        // dd($request->all());
+        $star = Star::where('name', $request->star)->first();
+        $star->movies()->attach($movie->id);
         $movie->title = $request->title;
         $movie->storyline = $request->storyline;
         $movie->save();
