@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Country;
+use App\Models\Movie;
+use App\Models\Star;
 use Illuminate\Http\Request;
 
 class CountryController extends Controller
@@ -14,7 +16,10 @@ class CountryController extends Controller
      */
     public function index()
     {
-        //
+        $countries = Country::all();
+        return view('country/countries_list', [
+            'countries' => $countries
+        ]);
     }
 
     /**
@@ -24,7 +29,7 @@ class CountryController extends Controller
      */
     public function create()
     {
-        //
+        return view('country/country_create');
     }
 
     /**
@@ -35,7 +40,11 @@ class CountryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $country = new Country();
+        $country->country = $request->name;
+        $country->save();
+
+        return redirect()->route('country.index');
     }
 
     /**
@@ -46,7 +55,9 @@ class CountryController extends Controller
      */
     public function show(Country $country)
     {
-        //
+        return view('country/country_read', [
+            'country' => $country
+        ]);
     }
 
     /**
@@ -57,7 +68,12 @@ class CountryController extends Controller
      */
     public function edit(Country $country)
     {
-        //
+        $countries = Country::all();
+        $movies = Movie::all();
+        return view('country/country_update', [
+            'countries' => $countries,
+            'movies' => $movies,
+        ]);
     }
 
     /**
@@ -69,7 +85,10 @@ class CountryController extends Controller
      */
     public function update(Request $request, Country $country)
     {
-        //
+        $country->country = $request->country;
+        $country->save();
+
+        return redirect()->route('country.index');
     }
 
     /**
@@ -80,6 +99,7 @@ class CountryController extends Controller
      */
     public function destroy(Country $country)
     {
-        //
+        $country->delete();
+        return redirect()->route('country.index');
     }
 }

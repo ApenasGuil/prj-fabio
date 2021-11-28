@@ -19,4 +19,19 @@ class Movie extends Model
     {
         return $this->belongsToMany(Star::class);
     }
+
+    public function language()
+    {
+        return $this->belongsTo(Language::class);
+    }
+
+    public function director()
+    {
+        return $this->belongsTo(Director::class);
+    }
+
+    public function genre()
+    {
+        return $this->belongsTo(Genre::class);
+    }
 }

@@ -13,4 +13,9 @@ class Language extends Model
     protected $fillable = [
         'language',
     ];
+
+    public function movies()
+    {
+        return $this->hasMany(Movie::class);
+    }
 }

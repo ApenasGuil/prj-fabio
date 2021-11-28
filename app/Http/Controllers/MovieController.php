@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Director;
 use App\Models\Movie;
 use App\Models\Star;
 use Illuminate\Http\Request;
@@ -16,7 +17,7 @@ class MovieController extends Controller
     public function index()
     {
         $movies = Movie::all();
-        return view('movies_list', [
+        return view('movie/movies_list', [
             'movies' => $movies
         ]);
     }
@@ -28,7 +29,7 @@ class MovieController extends Controller
      */
     public function create()
     {
-        return view('movie_create');
+        return view('movie/movie_create');
     }
 
     /**
@@ -55,7 +56,7 @@ class MovieController extends Controller
      */
     public function show(Movie $movie)
     {
-        return view('movie_read', [
+        return view('movie/movie_read', [
             'movie' => $movie
         ]);
     }
@@ -69,9 +70,11 @@ class MovieController extends Controller
     public function edit(Movie $movie)
     {
         $stars = Star::all();
-        return view('movie_update', [
+        $directors = Director::all();
+        return view('movie/movie_update', [
             'movie' => $movie,
-            'stars' => $stars
+            'stars' => $stars,
+            'directors' => $directors,
         ]);
     }
 
@@ -86,12 +89,17 @@ class MovieController extends Controller
     {
         // dd($request->all());
         $star = Star::where('name', $request->star)->first();
-        $star->movies()->attach($movie->id);
+        dd($request->star);
+        if ($request->star != '') {
+            if ($movie->stars->name != $request->star) {
+                $star->movies()->attach($movie->id);
+            }
+        }
         $movie->title = $request->title;
         $movie->storyline = $request->storyline;
         $movie->save();
 
-        return redirect()->route('movie.index');
+        return redirect()->back();
     }
 
     /**

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Director;
+use App\Models\Movie;
 use Illuminate\Http\Request;
 
 class DirectorController extends Controller
@@ -14,7 +15,10 @@ class DirectorController extends Controller
      */
     public function index()
     {
-        //
+        $directors = Director::all();
+        return view('director/directors_list', [
+            'directors' => $directors
+        ]);
     }
 
     /**
@@ -24,7 +28,7 @@ class DirectorController extends Controller
      */
     public function create()
     {
-        //
+        return view('director/director_create');
     }
 
     /**
@@ -35,7 +39,9 @@ class DirectorController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $director = $request->name;
+        Director::firstOrCreate(['name' => $director]);
+        return redirect()->route('director.index');
     }
 
     /**
@@ -46,7 +52,9 @@ class DirectorController extends Controller
      */
     public function show(Director $director)
     {
-        //
+        return view('director/director_read', [
+            'director' => $director
+        ]);
     }
 
     /**
@@ -57,7 +65,9 @@ class DirectorController extends Controller
      */
     public function edit(Director $director)
     {
-        //
+        return view('director/director_update', [
+            'director' => $director
+        ]);
     }
 
     /**
@@ -81,5 +91,13 @@ class DirectorController extends Controller
     public function destroy(Director $director)
     {
         //
+    }
+
+    public function detach(Request $request, Movie $movie)
+    {
+        $movie = Movie::where('id', $request->movie)->first();
+        $movie->director_id = NULL;
+        $movie->save();
+        return redirect()->back();
     }
 }

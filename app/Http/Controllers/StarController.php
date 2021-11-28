@@ -16,7 +16,7 @@ class StarController extends Controller
     public function index()
     {
         $movies = Star::all();
-        return view('stars_list', [
+        return view('star/stars_list', [
             'stars' => $movies
         ]);
     }
@@ -28,7 +28,7 @@ class StarController extends Controller
      */
     public function create()
     {
-        return view('star_create');
+        return view('star/star_create');
     }
 
     /**
@@ -40,9 +40,7 @@ class StarController extends Controller
     public function store(Request $request)
     {
         $star = $request->name;
-
         Star::firstOrCreate(['name' => $star]);
-
         return redirect()->route('star.index');
     }
 
@@ -54,7 +52,7 @@ class StarController extends Controller
      */
     public function show(Star $star)
     {
-        return view('star_read', [
+        return view('star/star_read', [
             'star' => $star
         ]);
     }
@@ -67,7 +65,7 @@ class StarController extends Controller
      */
     public function edit(Star $star)
     {
-        return view('star_update', [
+        return view('star/star_update', [
             'star' => $star
         ]);
     }
@@ -97,6 +95,14 @@ class StarController extends Controller
     {
         $star->delete();
         return redirect()->route('star.index');
+    }
+
+    public function star_attach(Request $request, Star $star, Movie $movie)
+    {
+        dd($request->all());
+        $star = Star::where('name', $request->star)->first();
+        $star->movies()->attach($movie->id);
+        return redirect()->back();
     }
 
     public function detach(Request $request, Star $star)

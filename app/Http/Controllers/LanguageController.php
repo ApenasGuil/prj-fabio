@@ -14,7 +14,10 @@ class LanguageController extends Controller
      */
     public function index()
     {
-        //
+        $langs = Language::all();
+        return view('language/languages_list', [
+            'langs' => $langs
+        ]);
     }
 
     /**
