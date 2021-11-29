@@ -4,32 +4,30 @@
     <table>
         <tr>
             <td>#ID</td>
-            <td>Título</td>
-            <td>Descrição</td>
-            <td>Atores</td>
+            <td>Países</td>
+            <td>Filmes</td>
         </tr>
 
-        @forelse ($movies as $movie)
+        @forelse ($countries as $country)
             <tr>
-                <td>{{ $movie->id }}</td>
-                <td>{{ $movie->title }}</td>
-                <td>{{ $movie->storyline }}</td>
+                <td>{{ $country->id }}</td>
+                <td>{{ $country->country }}</td>
                 <td>
-                    @forelse ($movie->stars as $star)
+                    @forelse ($country->movies as $movie)
                         <li>
-                            {{ $star->name }}
+                            {{ $movie->title }}
                         </li>
                     @empty
-                        Nenhum ator cadastrado.
+                        Nenhum filme cadastrado.
                     @endforelse
                 </td>
                 <td>
                     <div class="btn-group" role="group" aria-label="Basic example">
-                        <a href="{{ route('movie.show', ['movie' => $movie->id]) }}" type="button"
+                        <a href="{{ route('country.show', ['country' => $country->id]) }}" type="button"
                             class="btn btn-secondary">Informações</a>
-                        <a href="{{ route('movie.edit', ['movie' => $movie->id]) }}" type="button"
+                        <a href="{{ route('country.edit', ['country' => $country->id]) }}" type="button"
                             class="btn btn-secondary">Alterar</a>
-                        <form action="{{ route('movie.destroy', ['movie' => $movie->id]) }}" method="post">
+                        <form action="{{ route('country.destroy', ['country' => $country->id]) }}" method="post">
                             @csrf
                             @method('delete')
                             <input class="btn btn-secondary" type="submit" value="Deletar">
@@ -38,7 +36,11 @@
                 </td>
             </tr>
         @empty
-            <p>Nenhum filme cadastrado.</p>
+            <tr>
+                <td>
+                    Nenhum país cadastrado.
+                </td>
+            </tr>
         @endforelse
     </table>
 @stop

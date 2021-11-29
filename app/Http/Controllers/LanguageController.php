@@ -27,7 +27,7 @@ class LanguageController extends Controller
      */
     public function create()
     {
-        //
+        return view('language/language_create');
     }
 
     /**
@@ -38,7 +38,9 @@ class LanguageController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $language = $request->language;
+        Language::firstOrCreate(['language' => $language]);
+        return redirect()->route('language.index');
     }
 
     /**
@@ -49,7 +51,9 @@ class LanguageController extends Controller
      */
     public function show(Language $language)
     {
-        //
+        return view('language/language_read', [
+            'language' => $language
+        ]);
     }
 
     /**
@@ -60,7 +64,9 @@ class LanguageController extends Controller
      */
     public function edit(Language $language)
     {
-        //
+        return view('language/language_update', [
+            'language' => $language
+        ]);
     }
 
     /**
@@ -72,7 +78,10 @@ class LanguageController extends Controller
      */
     public function update(Request $request, Language $language)
     {
-        //
+        $language->language = $request->language;
+        $language->save();
+
+        return redirect()->route('language.index');
     }
 
     /**
@@ -83,6 +92,7 @@ class LanguageController extends Controller
      */
     public function destroy(Language $language)
     {
-        //
+        $language->delete();
+        return redirect()->route('language.index');
     }
 }

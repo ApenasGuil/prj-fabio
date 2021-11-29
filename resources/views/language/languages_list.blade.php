@@ -36,7 +36,11 @@
                 </td>
             </tr>
         @empty
-            <p>Nenhuma linguagem cadastrada.</p>
+            <tr>
+                <td>
+                    Nenhuma linguagem cadastrada.
+                </td>
+            </tr>
         @endforelse
     </table>
 @stop

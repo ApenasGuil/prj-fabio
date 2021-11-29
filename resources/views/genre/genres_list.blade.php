@@ -22,21 +22,25 @@
                     @endforelse
                 </td>
                 <td>
-                    {{-- <div class="btn-group" role="group" aria-label="Basic example">
-                        <a href="{{ route('movie.show', ['movie' => $movie->id]) }}" type="button"
+                    <div class="btn-group" role="group" aria-label="Basic example">
+                        <a href="{{ route('genre.show', ['genre' => $genre->id]) }}" type="button"
                             class="btn btn-secondary">Informações</a>
-                        <a href="{{ route('movie.edit', ['movie' => $movie->id]) }}" type="button"
+                        <a href="{{ route('genre.edit', ['genre' => $genre->id]) }}" type="button"
                             class="btn btn-secondary">Alterar</a>
-                        <form action="{{ route('movie.destroy', ['movie' => $movie->id]) }}" method="post">
+                        <form action="{{ route('genre.destroy', ['genre' => $genre->id]) }}" method="post">
                             @csrf
                             @method('delete')
                             <input class="btn btn-secondary" type="submit" value="Deletar">
                         </form>
-                    </div> --}}
+                    </div>
                 </td>
             </tr>
         @empty
-            <p>Nenhum gênero cadastrado.</p>
+            <tr>
+                <td>
+                    Nenhum gênero cadastrado.
+                </td>
+            </tr>
         @endforelse
     </table>
 @stop

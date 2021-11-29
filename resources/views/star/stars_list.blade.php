@@ -8,7 +8,7 @@
             <td>Filmes</td>
         </tr>
 
-        @foreach ($stars as $star)
+        @forelse ($stars as $star)
             <tr>
                 <td>{{ $star->id }}</td>
                 <td>{{ $star->name }}</td>
@@ -32,12 +32,15 @@
                             @method('delete')
                             <input class="btn btn-secondary" type="submit" value="Deletar">
                         </form>
-
-
-
                     </div>
                 </td>
             </tr>
-        @endforeach
+        @empty
+            <tr>
+                <td>
+                    Nenhum ator cadastrado.
+                </td>
+            </tr>
+        @endforelse
     </table>
 @stop

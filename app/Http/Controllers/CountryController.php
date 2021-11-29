@@ -40,10 +40,8 @@ class CountryController extends Controller
      */
     public function store(Request $request)
     {
-        $country = new Country();
-        $country->country = $request->name;
-        $country->save();
-
+        $country = $request->country;
+        Country::firstOrCreate(['country' => $country]);
         return redirect()->route('country.index');
     }
 
@@ -68,10 +66,9 @@ class CountryController extends Controller
      */
     public function edit(Country $country)
     {
-        $countries = Country::all();
         $movies = Movie::all();
         return view('country/country_update', [
-            'countries' => $countries,
+            'country' => $country,
             'movies' => $movies,
         ]);
     }

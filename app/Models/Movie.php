@@ -34,4 +34,9 @@ class Movie extends Model
     {
         return $this->belongsTo(Genre::class);
     }
+
+    public function country()
+    {
+        return $this->belongsTo(Country::class);
+    }
 }

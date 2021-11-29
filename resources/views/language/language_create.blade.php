@@ -1,17 +1,17 @@
 @extends('layouts.master')
 
 @section('content')
-    <h1>Cadastrar país</h1>
+    <h1>Cadastrar língua</h1>
     <div class="row">
         <div class="col-offset-5"></div>
         <div class="col-md-2">
-            <form action="{{ route('country.store') }}" method="post">
+            <form action="{{ route('language.store') }}" method="post">
                 @csrf
-                <label for="">País:</label>
-                <input type="text" name="country">
+                <label for="">Língua:</label>
+                <input type="text" name="language">
                 <br>
                 <br>
-                <input type="submit" value="Cadastrar pais ">
+                <input type="submit" value="Cadastrar língua">
             </form>
         </div>
         <div class="col-offset-5"></div>

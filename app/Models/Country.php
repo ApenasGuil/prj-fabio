@@ -13,4 +13,9 @@ class Country extends Model
     protected $fillable = [
         'country',
     ];
+
+    public function movies()
+    {
+        return $this->hasMany(Movie::class);
+    }
 }

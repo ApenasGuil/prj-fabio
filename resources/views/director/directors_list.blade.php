@@ -4,8 +4,8 @@
     <table>
         <tr>
             <td>#ID</td>
-            <td>Título</td>
-            <td>Descrição</td>
+            <td>Nome</td>
+            <td>Filmes</td>
         </tr>
         @forelse ($directors as $director)
             <tr>
@@ -35,7 +35,11 @@
                 </td>
             </tr>
         @empty
-            <p>Nenhum filme cadastrado.</p>
+            <tr>
+                <td>
+                    Nenhum diretor cadastrado.
+                </td>
+            </tr>
         @endforelse
     </table>
 @stop

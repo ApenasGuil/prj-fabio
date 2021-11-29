@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class CountrySeeder extends Seeder
+class DirectorSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,19 +14,19 @@ class CountrySeeder extends Seeder
      */
     public function run()
     {
-        DB::table('country')->insert([
+        DB::table('director')->insert([
             'id' => null,
-            'country' => 'Estados Unidos'
+            'name' => 'Denis Villeneuve'
         ]);
 
-        DB::table('country')->insert([
+        DB::table('director')->insert([
             'id' => null,
-            'country' => 'França'
+            'name' => 'Bryan Singer'
         ]);
 
-        DB::table('country')->insert([
+        DB::table('director')->insert([
             'id' => null,
-            'country' => 'Brasil'
+            'name' => 'Richard Kelly'
         ]);
     }
 }

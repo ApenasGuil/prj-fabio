@@ -19,6 +19,7 @@ class CreateMoviesTable extends Migration
             $table->unsignedInteger('director_id')->nullable()->constrained();
             $table->unsignedInteger('language_id')->nullable()->constrained();
             $table->unsignedInteger('genre_id')->nullable()->constrained();
+            $table->unsignedInteger('country_id')->nullable()->constrained();
             $table->string('title');
             $table->text('storyline')->nullable();
             $table->timestamps();

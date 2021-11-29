@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Country;
 use App\Models\Director;
 use App\Models\Movie;
+use App\Models\Genre;
 use App\Models\Star;
+use App\Models\Language;
 use Illuminate\Http\Request;
 
 class MovieController extends Controller
@@ -71,10 +74,16 @@ class MovieController extends Controller
     {
         $stars = Star::all();
         $directors = Director::all();
+        $countries = Country::all();
+        $languages = Language::all();
+        $genres = Genre::all();
         return view('movie/movie_update', [
             'movie' => $movie,
             'stars' => $stars,
             'directors' => $directors,
+            'countries' => $countries,
+            'languages' => $languages,
+            'genres' => $genres,
         ]);
     }
 
@@ -88,15 +97,16 @@ class MovieController extends Controller
     public function update(Request $request, Movie $movie)
     {
         // dd($request->all());
-        $star = Star::where('name', $request->star)->first();
-        dd($request->star);
+        $star = Star::where('name', "=", $request->star)->first();
         if ($request->star != '') {
-            if ($movie->stars->name != $request->star) {
-                $star->movies()->attach($movie->id);
-            }
+            $star->movies()->attach($movie);
         }
         $movie->title = $request->title;
         $movie->storyline = $request->storyline;
+        $country = Country::where('country', $request->country)->first();
+        if ($request->country != "Não cadastrado") {
+            $movie->country_id = $country->id;
+        }
         $movie->save();
 
         return redirect()->back();

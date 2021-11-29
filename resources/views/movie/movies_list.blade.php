@@ -6,6 +6,7 @@
             <td>#ID</td>
             <td>Título</td>
             <td>Descrição</td>
+            <td>Diretor</td>
             <td>Atores</td>
         </tr>
 
@@ -14,6 +15,7 @@
                 <td>{{ $movie->id }}</td>
                 <td>{{ $movie->title }}</td>
                 <td>{{ $movie->storyline }}</td>
+                <td>{{ $movie->director }}</td>
                 <td>
                     @forelse ($movie->stars as $star)
                         <li>
@@ -38,7 +40,11 @@
                 </td>
             </tr>
         @empty
-            <p>Nenhum filme cadastrado.</p>
+            <tr>
+                <td>
+                    Nenhum filme cadastrado.
+                </td>
+            </tr>
         @endforelse
     </table>
 @stop

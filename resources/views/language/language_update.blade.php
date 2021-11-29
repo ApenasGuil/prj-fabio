@@ -1,22 +1,22 @@
 @extends('layouts.master')
 
 @section('content')
-    <form action="{{ route('genre.update', ['genre' => $genre->id]) }}" method="post">
+    <form action="{{ route('language.update', ['language' => $language->id]) }}" method="post">
         @csrf
         @method('PUT')
-        <label for="">Gênero:</label>
-        <input type="text" name="genre" value="{{ $genre->genre }}">
+        <label for="">Língua:</label>
+        <input type="text" name="language" value="{{ $language->language }}">
         <br>
         <h2>Filmes:</h2>
         <table class="table">
             <thead>
                 <tr>
                     <th scope="col">#ID</th>
+                    <th scope="col">Língua</th>
                     <th scope="col">Filmes</th>
-                    <th scope="col">Ações</th>
                 </tr>
             </thead>
-            @forelse ($genre->movies as $movie)
+            @forelse ($language->movies as $movie)
                 <tbody>
                     <tr>
                         <th scope="row">{{ $movie->id }}</th>
@@ -39,7 +39,7 @@
             @empty
                 <tbody>
                     <tr>
-                        <th scope="row" colspan="3">Nenhum gênero cadastrado.</th>
+                        <th scope="row" colspan="3">Nenhum filme cadastrado.</th>
                     </tr>
                 </tbody>
             @endforelse
